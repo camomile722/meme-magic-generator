@@ -17,8 +17,11 @@ export interface FormValues {
     name: string;
     url: string;
   };
-  tags: string;
-  category: string;
+  textBottom: string;
+  textTop: string;
+  font: string;
+  fontSize: number;
+  alignText: string;
 }
 
 export interface UploadFileInputProps {
@@ -64,7 +67,7 @@ dashed gray"
             <Button
               as="span"
               bg="none"
-              p={10}
+              p={4}
               fontWeight="400"
               _hover={{
                 bg: "none",
@@ -72,7 +75,7 @@ dashed gray"
                 opacity: "0.6",
               }}
             >
-              <Upload boxSize={10} />
+              <Upload boxSize={6} />
             </Button>
           </CustomTooltip>
           <Text textAlign="center">.PNG .JPG</Text>

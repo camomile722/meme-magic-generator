@@ -10,9 +10,9 @@ export interface TemplatesDataProps {
     name: string;
     url: string;
   };
-
-  category: string;
-  tags: string;
+  textBottom: string;
+  textTop: string;
+  font: string;
 }
 
 export interface TemplateListProps {
@@ -38,7 +38,12 @@ const TemplateList = ({
           Popular Templates
         </Text>
 
-        <Flex gap="2" pb={10} flexWrap="wrap" justifyContent="space-between">
+        <Flex
+          gap={{ base: 6, md: 2 }}
+          pb={10}
+          flexWrap="wrap"
+          justifyContent="space-between"
+        >
           {templates.map((template) => (
             <TemplateItem
               key={template.id}

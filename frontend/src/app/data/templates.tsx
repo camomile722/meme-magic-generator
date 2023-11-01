@@ -5,8 +5,9 @@ export const templatesData = [
       name: "Sponge Bob 1",
       url: "/images/sponge_bob1.jpg",
     },
-    category: "cartoons",
-    tags: "",
+    textTop: "",
+    textBottom: "",
+    font: "",
   },
   {
     id: 2,
@@ -14,9 +15,9 @@ export const templatesData = [
       name: "Sponge Bob 2",
       url: "/images/sponge_bob2.jpg",
     },
-    category: "cartoons",
-
-    tags: "",
+    textTop: "",
+    textBottom: "",
+    font: "",
   },
   {
     id: 3,
@@ -25,7 +26,9 @@ export const templatesData = [
       url: "/images/sponge_bob3.jpg",
     },
     category: "cartoons",
-    tags: "",
+    textTop: "",
+    textBottom: "",
+    font: "",
   },
   {
     id: 4,
@@ -34,6 +37,8 @@ export const templatesData = [
       url: "/images/sponge_bob4.jpg",
     },
     category: "cartoons",
-    tags: "",
+    textTop: "",
+    textBottom: "",
+    font: "",
   },
 ];

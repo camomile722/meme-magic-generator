@@ -224,3 +224,65 @@ export const Info = createIcon({
     />
   ),
 });
+
+export const AlignTxtLeft = createIcon({
+  displayName: "AlignTxtLeft",
+  viewBox: "0 0 24 24",
+  path: (
+    <path
+      d="M3 4H21V6H3V4ZM3 19H17V21H3V19ZM3 14H21V16H3V14ZM3 9H17V11H3V9Z"
+      fill="currentColor"
+    />
+  ),
+});
+
+export const AlignTxtCenter = createIcon({
+  displayName: "AlignTxtCenter",
+  viewBox: "0 0 24 24",
+  path: (
+    <path
+      d="M3 4H21V6H3V4ZM5 19H19V21H5V19ZM3 14H21V16H3V14ZM5 9H19V11H5V9Z"
+      fill="currentColor"
+    />
+  ),
+});
+
+export const AlignTxtRight = createIcon({
+  displayName: "AlignTxtRight",
+  viewBox: "0 0 24 24",
+  path: (
+    <path
+      d="M3 4H21V6H3V4ZM7 19H21V21H7V19ZM3 14H21V16H3V14ZM7 9H21V11H7V9Z"
+      fill="currentColor"
+    />
+  ),
+});
+
+export const FontFamily = createIcon({
+  displayName: "FontFamily",
+  viewBox: "0 0 24 24",
+  path: (
+    <path
+      d="M5.55446 22H3.40039L11.0004 3H13.0004L20.6004 22H18.4463L16.0463 16H7.95446L5.55446 22ZM8.75446 14H15.2463L12.0004 5.88517L8.75446 14Z"
+      fill="currentColor"
+    />
+  ),
+});
+
+export const FontSize = createIcon({
+  displayName: "FontSize",
+  viewBox: "0 0 24 24",
+  path: (
+    <path
+      d="M11.2455 15H4.75368L2.75368 20H0.599609L6.99961 4H8.99961L15.3996 20H13.2455L11.2455 15ZM10.4455 13L7.99961 6.88516L5.55368 13H10.4455ZM20.9996 12.5351V12H22.9996V20H20.9996V19.4649C20.4113 19.8052 19.7282 20 18.9996 20C16.7905 20 14.9996 18.2091 14.9996 16C14.9996 13.7909 16.7905 12 18.9996 12C19.7282 12 20.4113 12.1948 20.9996 12.5351ZM18.9996 18C20.1042 18 20.9996 17.1046 20.9996 16C20.9996 14.8954 20.1042 14 18.9996 14C17.895 14 16.9996 14.8954 16.9996 16C16.9996 17.1046 17.895 18 18.9996 18Z"
+      fill="currentColor"
+    />
+  ),
+});
+export const FontColor = createIcon({
+  displayName: "FontColor",
+  viewBox: "0 0 24 24",
+  path:(
+<path d="M15.2459 14H8.75407L7.15407 18H5L11 3H13L19 18H16.8459L15.2459 14ZM14.4459 12L12 5.88516L9.55407 12H14.4459ZM3 20H21V22H3V20Z" fill="currentColor"  />
+  ),
+});
