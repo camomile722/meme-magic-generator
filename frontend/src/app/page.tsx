@@ -26,7 +26,11 @@ export default function Home() {
   } = useDisclosure();
   useEffect(() => {
     const fetchMemsTemplates = async () => {
-      const res = await fetch("/api/mems/templates");
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      if (!apiUrl) {
+        throw new Error("NEXT_PUBLIC_API_URL is not defined.");
+      }
+      const res = await fetch(apiUrl);
       const data = await res.json();
       setTemplates(data);
       setLoading(false);
