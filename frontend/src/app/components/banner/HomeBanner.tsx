@@ -1,9 +1,7 @@
-import { Box, Text, Button, Wrap } from "@chakra-ui/react";
+import { Box, Text, Button } from "@chakra-ui/react";
 import { CustomTooltip } from "../tooltip/CustomTooltip";
+import { HomeBannerProps } from "@/app/types";
 
-export interface HomeBannerProps {
-  onDrawerOpen: () => void;
-}
 export const HomeBanner = ({ onDrawerOpen }: HomeBannerProps) => {
   return (
     <Box pb={{ base: 10, md: 20 }} textAlign="center">

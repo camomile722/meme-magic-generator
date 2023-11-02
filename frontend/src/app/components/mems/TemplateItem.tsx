@@ -1,12 +1,6 @@
+import { TemplateItemProps } from "@/app/types";
 import { Box } from "@chakra-ui/react";
 import Image from "next/image";
-import { TemplatesDataProps } from "./TemplateList";
-
-export interface TemplateItemProps {
-  template: TemplatesDataProps;
-  setSelectedTemplate: (template: TemplatesDataProps) => void;
-  onModalOpen: () => void;
-}
 
 export const TemplateItem = ({
   template,
@@ -22,7 +16,6 @@ export const TemplateItem = ({
       onClick={() => {
         onModalOpen();
         setSelectedTemplate(template);
-        console.log(template);
       }}
       position="relative"
       zIndex={10}
@@ -30,11 +23,10 @@ export const TemplateItem = ({
       <Image
         src={template.image?.url}
         alt={template.image?.name}
-        // width={384}
-        // height={251}
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: "cover" }}
         quality={100}
+        priority
       />
     </Box>
   );

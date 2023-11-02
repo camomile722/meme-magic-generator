@@ -1,21 +1,14 @@
 import { ArrowLeft, ArrowRight } from "@/app/theme/icons";
+import { ImageModalProps } from "@/app/types";
 import {
   Box,
   Modal,
   ModalContent,
   ModalOverlay,
-  Text,
   IconButton,
   Icon,
 } from "@chakra-ui/react";
 import Image from "next/image";
-export interface ImageModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  selectedTemplate: any;
-  setSelectedTemplate: (image: any) => void;
-  templates: any;
-}
 
 export const ImageModal = ({
   isOpen,
@@ -58,7 +51,7 @@ export const ImageModal = ({
               width="300"
               height="300"
               layout="responsive"
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
               quality={100}
             />
 

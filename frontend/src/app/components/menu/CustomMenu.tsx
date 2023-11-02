@@ -7,20 +7,10 @@ import {
   MenuItemOption,
   Button,
 } from "@chakra-ui/react";
-import { JSXElementConstructor, ReactElement } from "react";
-import { CustomTooltip } from "../tooltip/CustomTooltip";
-import { NextFont } from "next/dist/compiled/@next/font";
 
-export interface CustomMenuProps {
-  customOptions: { id: string; value: string; label: string }[];
-  setCustomOption: (option: string) => void;
-  menuButtonIcon?: ReactElement<any, string | JSXElementConstructor<any>>;
-  menuButtonIconRight?: ReactElement<any, string | JSXElementConstructor<any>>;
-  buttonLabel?: string;
-  tooltipLabel: string;
-  onClick?: (selectedFileExtension: string) => void;
-  disabled?: boolean;
-}
+import { CustomTooltip } from "../tooltip/CustomTooltip";
+import { CustomMenuProps } from "@/app/types";
+
 export const CustomMenu = ({
   customOptions,
   setCustomOption,

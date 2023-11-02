@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { HamburgerIcon } from "../../theme/icons";
-import { menuItems } from "../../data";
+import { menuItems } from "../../data/options";
 import { usePathname } from "next/navigation";
 
 export const NavBarMobile = () => {

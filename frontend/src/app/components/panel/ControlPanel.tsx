@@ -11,16 +11,7 @@ import { CustomTooltip } from "../tooltip/CustomTooltip";
 import { CustomMenu } from "../menu/CustomMenu";
 import { SketchPicker } from "react-color";
 import { useEffect, useRef, useState } from "react";
-
-export interface ControlPanelProps {
-  setAlignText: (alignText: string) => void;
-  selectFontOptions: { id: string; value: string; label: string }[];
-  setCustomOption: (option: string) => void;
-  fontSizeOptions: { id: string; value: string; label: string }[];
-  setFontSize: (fontSize: string) => void;
-  setColorText: (colorText: string) => void;
-  textColor: string;
-}
+import { ControlPanelProps } from "@/app/types";
 
 export const ControlPanel = ({
   setAlignText,
@@ -29,7 +20,7 @@ export const ControlPanel = ({
   fontSizeOptions,
   setFontSize,
   setColorText,
-  textColor,
+  textColor = "black",
 }: ControlPanelProps) => {
   const menuItems = [
     { value: "center", label: "Center", icon: <AlignTxtCenter /> },
@@ -86,7 +77,7 @@ export const ControlPanel = ({
         <IconButton
           aria-label="Choose text color"
           icon={<FontColor />}
-          color={textColor ?? "black"}
+          color={textColor}
           onClick={() => {
             setIsColorPickerOpen(!isColorPickerOpen);
           }}

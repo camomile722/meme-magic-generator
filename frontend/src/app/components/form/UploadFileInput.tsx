@@ -9,21 +9,7 @@ import {
 
 import { CustomTooltip } from "../tooltip/CustomTooltip";
 import { Upload } from "@/app/theme/icons";
-import { FormikProps } from "formik";
-
-export interface FormValues {
-  id: string;
-  image: {
-    name: string;
-    url: string;
-  };
-  textBottom: string;
-  textTop: string;
-}
-
-export interface UploadFileInputProps {
-  formik: FormikProps<FormValues>;
-}
+import { UploadFileInputProps } from "@/app/types";
 
 export const UploadFileInput = ({ formik }: UploadFileInputProps) => {
   const handleFileAdd = (e: React.ChangeEvent<HTMLInputElement>) => {

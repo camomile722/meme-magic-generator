@@ -1,24 +1,9 @@
 "use client";
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
-import Image from "next/image";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import Wrapper from "../wrapper/Wrapper";
 import { TemplateItem } from "./TemplateItem";
+import { TemplateListProps } from "@/app/types";
 
-export interface TemplatesDataProps {
-  id: string;
-  image: {
-    name: string;
-    url: string;
-  };
-  textBottom: string;
-  textTop: string;
-}
-
-export interface TemplateListProps {
-  templates: TemplatesDataProps[];
-  setSelectedTemplate: (template: TemplatesDataProps) => void;
-  onModalOpen: () => void;
-}
 const TemplateList = ({
   templates,
   setSelectedTemplate,

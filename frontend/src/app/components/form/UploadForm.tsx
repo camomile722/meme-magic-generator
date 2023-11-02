@@ -1,61 +1,31 @@
-import React, { use, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import {
-  Box,
   Drawer,
   DrawerCloseButton,
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
   Flex,
-  FormControl,
-  Text,
-  Textarea,
 } from "@chakra-ui/react";
-
+import html2canvas from "html2canvas";
+import download from "downloadjs";
 import { UploadFileInput } from "./UploadFileInput";
-import { TemplatesDataProps } from "../mems/TemplateList";
-import Image from "next/image";
 import { ControlPanel } from "../panel/ControlPanel";
 import { Logo } from "../layout/Logo";
 import { CustomMenu } from "../menu/CustomMenu";
 import { ArrowDown } from "@/app/theme/icons";
-import html2canvas from "html2canvas";
-import download from "downloadjs";
-import { comic_neue, inter, pacifico, quicksand } from "@/app/layout";
+import {
+  fileExtensionOptions,
+  fontSizeOptions,
+  selectFontOptions,
+} from "@/app/data/options";
+import { CustomTextArea } from "./CustomTextArea";
+import { MemeContainer } from "../mems/MemeContainer";
+import { UploadFormProps } from "@/app/types";
 
-export interface UploadFormProps {
-  templates: TemplatesDataProps[];
-  setTemplates: React.Dispatch<React.SetStateAction<TemplatesDataProps[]>>;
-  onClose: () => void;
-  isOpen: boolean;
-}
-
-const fontSizeOptions = [
-  { id: "1", value: "2xl", label: "40px" },
-  { id: "2", value: "4xl", label: "50px" },
-  { id: "3", value: "6xl", label: "60px" },
-];
-
-const selectFontOptions = [
-  { id: "1", value: quicksand.className, label: "Quicksand" },
-  { id: "2", value: comic_neue.className, label: "Comic Neue" },
-  { id: "3", value: pacifico.className, label: "Pacifico" },
-  { id: "4", value: inter.className, label: "Inter" },
-];
-
-const fileExtensionOptions = [
-  { id: "1", value: "jpg", label: "JPG" },
-  { id: "2", value: "png", label: "PNG" },
-  { id: "4", value: "gif", label: "GIF" },
-];
-export const UploadForm = ({
-  templates,
-  setTemplates,
-  onClose,
-  isOpen,
-}: UploadFormProps) => {
+export const UploadForm = ({ onClose, isOpen }: UploadFormProps) => {
   const validationSchema = Yup.object().shape({
     image: Yup.object().shape({
       name: Yup.string().required("Please select an image"),
@@ -74,11 +44,7 @@ export const UploadForm = ({
     validationSchema,
     onSubmit: (values) => {
       console.log("Form submitted with values:", values);
-      // setTemplates([values, ...templates]);
-
-      // onClose();
       formik.setErrors({});
-      // formik.resetForm();
     },
   });
 
@@ -93,13 +59,12 @@ export const UploadForm = ({
   const [colorTextBottom, setColorTextBottom] = useState("#000000");
   const [fileExtension, setFileExtension] = useState("");
 
-  const memeContainer = useRef(null);
-  console.log("formik.errors?.image?.name ", formik.errors?.image?.name);
+  const memeContainerRef = useRef(null);
 
   const handleDownload = (selectedFileExtension: string) => {
-    if (memeContainer.current && selectedFileExtension) {
+    if (memeContainerRef.current && selectedFileExtension) {
       // Capture the edited image from the memeContainer
-      html2canvas(memeContainer.current).then((canvas) => {
+      html2canvas(memeContainerRef.current).then((canvas) => {
         // Convert the captured canvas to a data URL
         const dataUrl = canvas.toDataURL(`image/${selectedFileExtension}`);
 
@@ -137,71 +102,20 @@ export const UploadForm = ({
             flexDir={{ base: "column", md: "row" }}
           >
             {formik.values?.image.name !== "" && (
-              <Box
-                width={
-                  formik.values?.image.name !== ""
-                    ? { base: "100%", md: "60%" }
-                    : "100%"
-                }
-                position="relative"
-                height={{ base: "300px", md: "500px" }}
-                id="meme-container"
-                ref={memeContainer}
-              >
-                <Box
-                  color={colorTextTop}
-                  position="absolute"
-                  zIndex="20"
-                  top={6}
-                  left={
-                    alignTextTop === "center"
-                      ? "50%"
-                      : alignTextTop === "right"
-                      ? ""
-                      : "6"
-                  }
-                  right={alignTextTop === "right" ? "6" : ""}
-                  fontSize={fontSizeTop}
-                  fontWeight="extrabold"
-                  fontFamily={fontFamilyTop}
-                  className={fontFamilyTop}
-                  transform={
-                    alignTextTop === "center" ? "translateX(-50%)" : "none"
-                  }
-                >
-                  <Text>{textTop}</Text>
-                </Box>
-                <Image
-                  src={formik.values.image?.url}
-                  alt={formik.values.image?.name}
-                  layout="fill"
-                  objectFit="cover"
-                  quality={100}
-                />
-                <Box
-                  color={colorTextBottom}
-                  position="absolute"
-                  zIndex="20"
-                  bottom={6}
-                  left={
-                    alignTextBottom === "center"
-                      ? "50%"
-                      : alignTextBottom === "right"
-                      ? ""
-                      : "6"
-                  }
-                  right={alignTextBottom === "right" ? "6" : ""}
-                  fontSize={fontSizeBottom}
-                  fontWeight="extrabold"
-                  fontFamily={fontFamilyBottom}
-                  className={fontFamilyBottom}
-                  transform={
-                    alignTextBottom === "center" ? "translateX(-50%)" : "none"
-                  }
-                >
-                  <Text>{textBottom}</Text>
-                </Box>
-              </Box>
+              <MemeContainer
+                memeContainerRef={memeContainerRef}
+                formik={formik}
+                colorTextTop={colorTextTop}
+                colorTextBottom={colorTextBottom}
+                alignTextBottom={alignTextBottom}
+                alignTextTop={alignTextTop}
+                fontSizeBottom={fontSizeBottom}
+                fontSizeTop={fontSizeTop}
+                fontFamilyBottom={fontFamilyBottom}
+                fontFamilyTop={fontFamilyTop}
+                textBottom={textBottom}
+                textTop={textTop}
+              />
             )}
             <Flex
               gap={6}
@@ -215,7 +129,11 @@ export const UploadForm = ({
             >
               <UploadFileInput formik={formik} />
 
-              <FormControl>
+              <CustomTextArea
+                formik={formik}
+                fieldName="textTop"
+                placeholder="Text Top"
+              >
                 <ControlPanel
                   setAlignText={setAlignTextTop}
                   setCustomOption={setFontFamilyTop}
@@ -225,20 +143,13 @@ export const UploadForm = ({
                   setColorText={setColorTextTop}
                   textColor={colorTextTop}
                 />
-                <Textarea
-                  size="md"
-                  placeholder="Text Top"
-                  {...formik.getFieldProps("textTop")}
-                  _focus={{
-                    borderColor: "gray.300",
-                    boxShadow: "sm",
-                    borderWidth: "2px",
-                  }}
-                  mt={2}
-                />
-              </FormControl>
+              </CustomTextArea>
 
-              <FormControl>
+              <CustomTextArea
+                formik={formik}
+                placeholder="Text Bottom"
+                fieldName="textBottom"
+              >
                 <ControlPanel
                   setAlignText={setAlignTextBottom}
                   setCustomOption={setFontFamilyBottom}
@@ -248,18 +159,7 @@ export const UploadForm = ({
                   setColorText={setColorTextBottom}
                   textColor={colorTextBottom}
                 />
-                <Textarea
-                  size="md"
-                  placeholder="Text Bottom"
-                  {...formik.getFieldProps("textBottom")}
-                  _focus={{
-                    borderColor: "gray.300",
-                    boxShadow: "sm",
-                    borderWidth: "2px",
-                  }}
-                  mt={2}
-                />
-              </FormControl>
+              </CustomTextArea>
 
               <CustomMenu
                 customOptions={fileExtensionOptions}

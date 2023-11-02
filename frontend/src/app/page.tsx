@@ -1,16 +1,13 @@
 "use client";
 import { Box, useDisclosure } from "@chakra-ui/react";
 import { Suspense, useEffect, useState } from "react";
-
-import { templatesData } from "./data/templates";
-import TemplateList, {
-  TemplatesDataProps,
-} from "./components/mems/TemplateList";
+import TemplateList from "./components/mems/TemplateList";
 import LoadingPage from "./loading";
 import { Advantages } from "./components/advantages/Advantages";
 import { ImageModal } from "./components/modals/ImageModal";
 import { UploadForm } from "./components/form/UploadForm";
 import { HomeBanner } from "./components/banner/HomeBanner";
+import { TemplatesDataProps } from "./types";
 
 export default function Home() {
   const [templates, setTemplates] = useState<TemplatesDataProps[]>([]);

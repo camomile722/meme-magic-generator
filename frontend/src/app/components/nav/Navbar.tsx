@@ -1,14 +1,10 @@
 "use client";
 import { Box, Flex, ListItem, Text, UnorderedList } from "@chakra-ui/react";
-import { Like, Search, ShoppingBag, User } from "../../theme/icons";
-
-import { useSelector } from "react-redux";
-import Wrapper from "../wrapper/Wrapper";
+import { ShoppingBag, User } from "../../theme/icons";
 import NavIconLink from "./NavIconLink";
-
 import NavBarMobile from "./NavBarMobile";
 import { Logo } from "../layout/Logo";
-import { menuItems } from "../../data";
+import { menuItems } from "../../data/options";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

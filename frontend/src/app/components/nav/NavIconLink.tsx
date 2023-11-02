@@ -1,13 +1,9 @@
 "use client";
+import { NavIconLinkProps } from "@/app/types";
 import { ListItem } from "@chakra-ui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export interface NavIconLinkProps {
-  icon: React.ReactNode;
-  children?: React.ReactNode;
-  url: string;
-}
 function NavIconLink({ icon, children, url }: NavIconLinkProps) {
   const pathname = usePathname();
   return (
