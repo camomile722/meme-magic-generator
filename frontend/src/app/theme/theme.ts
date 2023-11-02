@@ -10,4 +10,3 @@ export const theme = extendTheme({
     ...shadows,
   },
 });
-console.log("theme", theme);

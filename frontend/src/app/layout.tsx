@@ -5,25 +5,25 @@ import { Header } from "./components/layout/Header";
 import { Providers } from "./providers";
 import { Footer } from "./components/layout/Footer";
 
-const quicksand = Quicksand({
+export const quicksand = Quicksand({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
 });
 
-const inter = Inter({
+export const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
-const pacifico = Pacifico({
+export const pacifico = Pacifico({
   subsets: ["latin"],
   weight: ["400"],
 });
 
-const comic_neue = Comic_Neue({
+export const comic_neue = Comic_Neue({
   subsets: ["latin"],
   weight: ["400"],
 });
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Meme Generator App",
   description: "Meme Generator App, built with Next.js und Chakra UI",
 };

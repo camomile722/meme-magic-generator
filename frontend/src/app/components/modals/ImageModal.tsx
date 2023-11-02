@@ -1,7 +1,6 @@
 import { ArrowLeft, ArrowRight } from "@/app/theme/icons";
 import {
   Box,
-  Image,
   Modal,
   ModalContent,
   ModalOverlay,
@@ -9,7 +8,7 @@ import {
   IconButton,
   Icon,
 } from "@chakra-ui/react";
-
+import Image from "next/image";
 export interface ImageModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -53,7 +52,15 @@ export const ImageModal = ({
       <ModalContent>
         {selectedTemplate && (
           <Box>
-            <Image src={selectedTemplate?.url} alt={selectedTemplate?.name} />
+            <Image
+              src={selectedTemplate?.image.url}
+              alt={selectedTemplate?.image.name}
+              width="300"
+              height="300"
+              layout="responsive"
+              objectFit="cover"
+              quality={100}
+            />
 
             <IconButton
               position="absolute"

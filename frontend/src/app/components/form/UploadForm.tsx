@@ -1,9 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { use, useRef, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import {
   Box,
-  Button,
   Drawer,
   DrawerCloseButton,
   DrawerContent,
@@ -11,18 +10,20 @@ import {
   DrawerOverlay,
   Flex,
   FormControl,
-  FormHelperText,
   Text,
   Textarea,
 } from "@chakra-ui/react";
-import { SketchPicker } from "react-color";
 
 import { UploadFileInput } from "./UploadFileInput";
 import { TemplatesDataProps } from "../mems/TemplateList";
 import Image from "next/image";
 import { ControlPanel } from "../panel/ControlPanel";
-import { Comic_Neue, Inter, Pacifico, Quicksand } from "next/font/google";
 import { Logo } from "../layout/Logo";
+import { CustomMenu } from "../menu/CustomMenu";
+import { ArrowDown } from "@/app/theme/icons";
+import html2canvas from "html2canvas";
+import download from "downloadjs";
+import { comic_neue, inter, pacifico, quicksand } from "@/app/layout";
 
 export interface UploadFormProps {
   templates: TemplatesDataProps[];
@@ -37,29 +38,17 @@ const fontSizeOptions = [
   { id: "3", value: "6xl", label: "60px" },
 ];
 
-const quicksand = Quicksand({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-});
-const pacifico = Pacifico({
-  subsets: ["latin"],
-  weight: ["400"],
-});
-
-const comic_neue = Comic_Neue({
-  subsets: ["latin"],
-  weight: ["400"],
-});
-
 const selectFontOptions = [
   { id: "1", value: quicksand.className, label: "Quicksand" },
   { id: "2", value: comic_neue.className, label: "Comic Neue" },
   { id: "3", value: pacifico.className, label: "Pacifico" },
   { id: "4", value: inter.className, label: "Inter" },
+];
+
+const fileExtensionOptions = [
+  { id: "1", value: "jpg", label: "JPG" },
+  { id: "2", value: "png", label: "PNG" },
+  { id: "4", value: "gif", label: "GIF" },
 ];
 export const UploadForm = ({
   templates,
@@ -71,9 +60,6 @@ export const UploadForm = ({
     image: Yup.object().shape({
       name: Yup.string().required("Please select an image"),
     }),
-    textBottom: Yup.string().required("Please enter text for bottom"),
-    textTop: Yup.string().required("Please enter text for top"),
-    font: Yup.string().required("Please select a font"),
   });
   const formik = useFormik({
     initialValues: {
@@ -84,23 +70,19 @@ export const UploadForm = ({
       },
       textBottom: "",
       textTop: "",
-      font: "",
-      alignText: "center",
-      fontSize: 40,
     },
     validationSchema,
     onSubmit: (values) => {
       console.log("Form submitted with values:", values);
-      setTemplates([values, ...templates]);
+      // setTemplates([values, ...templates]);
 
-      onClose();
+      // onClose();
       formik.setErrors({});
-      formik.resetForm();
+      // formik.resetForm();
     },
   });
-  // const { image, textBottom, textTop, font, alignText, fontSize } =
-  //   formik.values;
-  const { image, textBottom, textTop, fontSize } = formik.values;
+
+  const { textBottom, textTop } = formik.values;
   const [alignTextTop, setAlignTextTop] = useState("");
   const [alignTextBottom, setAlignTextBottom] = useState("");
   const [fontFamilyTop, setFontFamilyTop] = useState("");
@@ -109,8 +91,27 @@ export const UploadForm = ({
   const [fontSizeBottom, setFontSizeBottom] = useState("");
   const [colorTextTop, setColorTextTop] = useState("#000000");
   const [colorTextBottom, setColorTextBottom] = useState("#000000");
+  const [fileExtension, setFileExtension] = useState("");
 
-  console.log("fontFamilyTop", fontFamilyTop);
+  const memeContainer = useRef(null);
+  console.log("formik.errors?.image?.name ", formik.errors?.image?.name);
+
+  const handleDownload = (selectedFileExtension: string) => {
+    if (memeContainer.current && selectedFileExtension) {
+      // Capture the edited image from the memeContainer
+      html2canvas(memeContainer.current).then((canvas) => {
+        // Convert the captured canvas to a data URL
+        const dataUrl = canvas.toDataURL(`image/${selectedFileExtension}`);
+
+        // Trigger the download using the downloadjs library
+        download(
+          dataUrl,
+          `meme.${selectedFileExtension}`,
+          `image/${selectedFileExtension}`
+        );
+      });
+    }
+  };
 
   return (
     <Drawer
@@ -126,13 +127,27 @@ export const UploadForm = ({
       <DrawerOverlay />
       <DrawerContent p={6} maxHeight="100vh" overflowY="auto">
         <DrawerCloseButton />
-        <DrawerHeader px="0">
+        <DrawerHeader px="0" mb={4}>
           <Logo />
         </DrawerHeader>
         <form encType="file" onSubmit={formik.handleSubmit}>
-          <Flex justifyContent="space-between" gap={4}>
+          <Flex
+            justifyContent="space-between"
+            gap={4}
+            flexDir={{ base: "column", md: "row" }}
+          >
             {formik.values?.image.name !== "" && (
-              <Box width="65%" position="relative">
+              <Box
+                width={
+                  formik.values?.image.name !== ""
+                    ? { base: "100%", md: "60%" }
+                    : "100%"
+                }
+                position="relative"
+                height={{ base: "300px", md: "500px" }}
+                id="meme-container"
+                ref={memeContainer}
+              >
                 <Box
                   color={colorTextTop}
                   position="absolute"
@@ -148,7 +163,6 @@ export const UploadForm = ({
                   right={alignTextTop === "right" ? "6" : ""}
                   fontSize={fontSizeTop}
                   fontWeight="extrabold"
-                  textTransform="uppercase"
                   fontFamily={fontFamilyTop}
                   className={fontFamilyTop}
                   transform={
@@ -179,7 +193,6 @@ export const UploadForm = ({
                   right={alignTextBottom === "right" ? "6" : ""}
                   fontSize={fontSizeBottom}
                   fontWeight="extrabold"
-                  textTransform="uppercase"
                   fontFamily={fontFamilyBottom}
                   className={fontFamilyBottom}
                   transform={
@@ -194,7 +207,11 @@ export const UploadForm = ({
               gap={6}
               alignItems="center"
               flexDir="column"
-              width={formik.values?.image.name ? "30%" : "100%"}
+              width={
+                formik.values?.image.name !== ""
+                  ? { base: "100%", md: "40%" }
+                  : "100%"
+              }
             >
               <UploadFileInput formik={formik} />
 
@@ -219,11 +236,6 @@ export const UploadForm = ({
                   }}
                   mt={2}
                 />
-                {formik.touched.textTop && formik.errors.textTop && (
-                  <FormHelperText color="red">
-                    {formik.errors.textTop}
-                  </FormHelperText>
-                )}
               </FormControl>
 
               <FormControl>
@@ -247,24 +259,17 @@ export const UploadForm = ({
                   }}
                   mt={2}
                 />
-
-                {formik.touched.textBottom && formik.errors.textBottom && (
-                  <FormHelperText color="red">
-                    {formik.errors.textBottom}
-                  </FormHelperText>
-                )}
               </FormControl>
 
-              <Button
-                bg="brand.200"
-                type="submit"
-                color="white"
-                display="block"
-                width="100%"
-                borderRadius="0"
-              >
-                Generate Meme
-              </Button>
+              <CustomMenu
+                customOptions={fileExtensionOptions}
+                setCustomOption={setFileExtension}
+                menuButtonIconRight={<ArrowDown />}
+                buttonLabel="Download as"
+                tooltipLabel="Download file as"
+                onClick={handleDownload}
+                disabled={formik.errors?.image?.name !== undefined}
+              />
             </Flex>
           </Flex>
         </form>

@@ -12,7 +12,6 @@ export interface TemplatesDataProps {
   };
   textBottom: string;
   textTop: string;
-  font: string;
 }
 
 export interface TemplateListProps {

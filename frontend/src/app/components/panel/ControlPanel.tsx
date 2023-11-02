@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from "react";
 export interface ControlPanelProps {
   setAlignText: (alignText: string) => void;
   selectFontOptions: { id: string; value: string; label: string }[];
-  setCustomOption: (custom: string) => void;
+  setCustomOption: (option: string) => void;
   fontSizeOptions: { id: string; value: string; label: string }[];
   setFontSize: (fontSize: string) => void;
   setColorText: (colorText: string) => void;
@@ -38,14 +38,14 @@ export const ControlPanel = ({
   ];
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const colorPickerRef = useRef(null);
-  const handleColorChange = (color) => {
+  const handleColorChange = (color: any) => {
     setColorText(color.hex);
   };
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         colorPickerRef.current &&
-        !colorPickerRef.current.contains(event.target)
+        !(colorPickerRef.current as any).contains(event.target)
       ) {
         // Click occurred outside the SketchPicker, so close it
         setIsColorPickerOpen(false);

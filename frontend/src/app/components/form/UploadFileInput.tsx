@@ -19,9 +19,6 @@ export interface FormValues {
   };
   textBottom: string;
   textTop: string;
-  font: string;
-  fontSize: number;
-  alignText: string;
 }
 
 export interface UploadFileInputProps {

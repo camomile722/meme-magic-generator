@@ -282,7 +282,21 @@ export const FontSize = createIcon({
 export const FontColor = createIcon({
   displayName: "FontColor",
   viewBox: "0 0 24 24",
-  path:(
-<path d="M15.2459 14H8.75407L7.15407 18H5L11 3H13L19 18H16.8459L15.2459 14ZM14.4459 12L12 5.88516L9.55407 12H14.4459ZM3 20H21V22H3V20Z" fill="currentColor"  />
+  path: (
+    <path
+      d="M15.2459 14H8.75407L7.15407 18H5L11 3H13L19 18H16.8459L15.2459 14ZM14.4459 12L12 5.88516L9.55407 12H14.4459ZM3 20H21V22H3V20Z"
+      fill="currentColor"
+    />
+  ),
+});
+
+export const ArrowDown = createIcon({
+  displayName: "ArrowDown",
+  viewBox: "0 0 24 24",
+  path: (
+    <path
+      d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"
+      fill="currentColor"
+    />
   ),
 });
