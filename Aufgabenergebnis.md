@@ -23,8 +23,7 @@ Chakra UI ist eine React-Komponentenbibliothek, die mir aus verschiedenen Gründ
 
 ## Eingesetzte 3rd Party Libraries
 
-Ich setze in meinem Projekt die folgenden 3rd Party Libraries ein: (falls keine, Tabelle entfernen und begründen warum)
-
+Ich setze in meinem Projekt die folgenden 3rd Party Libraries ein:
 | [Chakra UI](https://chakra-ui.com/) | React-Komponentenbibliothek, beschleunigt die Entwicklung des Frontends, sehe oben |
 
 | [formik](https://formik.org/docs/examples/basic) | Framework für Validierung | Beschleunigt die Entwicklung der Forms in React |
@@ -33,7 +32,7 @@ Ich setze in meinem Projekt die folgenden 3rd Party Libraries ein: (falls keine,
 
 | [html2canvas](https://html2canvas.hertzen.com/getting-started) | Bibliothek, die ein DOM-Element (in diesem Fall das Element memeContainerRef) erfasst und dessen visuelle Darstellung als Canvas generiert. |
 
-| [downloadjs] Bibliothek zum Initiieren eines Downloads des Bildes mit bestimmter Dateierweiterung.
+| [downloadjs](https://www.npmjs.com/package/downloadjs) Bibliothek zum Initiieren eines Downloads des Bildes mit bestimmter Dateierweiterung.
 
 ## Installation / Ausführen des Projektes
 
